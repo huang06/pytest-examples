@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+boto3 = "*"
+pre-commit = "*"
+pytest-cov = "*"
+moto = {extras = ["s3"], version = "*"}
+
+[requires]
