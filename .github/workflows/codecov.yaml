@@ -1,0 +1,27 @@
+---
+name: pre-commit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  code-cov:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install packages with pipenv
+        run: |
+          python3 -m pip install -U pip setuptools wheel
+          python3 -m pip install pipenv
+          pipenv sync --dev --system
+      - name: Run pytest and generate coverage report
+        run: |
+          pytest --cov=mypkg --cov-report=xml
+      - uses: codecov/codecov-action@v3
+
