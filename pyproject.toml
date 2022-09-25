@@ -1,0 +1,5 @@
+[tool.pytest.ini_options]
+markers = [
+    "e2e",
+]
+addopts = "tests -vvs --cov=mypkg --cov-report=term-missing"

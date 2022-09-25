@@ -22,6 +22,5 @@ jobs:
           pipenv sync --dev --system
       - name: Run pytest and generate coverage report
         run: |
-          pytest --cov=mypkg --cov-report=xml
+          pytest --cov-report=xml
       - uses: codecov/codecov-action@v3
-
