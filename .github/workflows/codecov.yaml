@@ -20,7 +20,17 @@ jobs:
           python3 -m pip install -U pip setuptools wheel
           python3 -m pip install pipenv
           pipenv sync --dev --system
+
       - name: Run pytest and generate coverage report
         run: |
           pytest --cov-report=xml
       - uses: codecov/codecov-action@v3
+        with:
+          flags: unittest
+
+      - name: Run pytest and generate coverage report
+        run: |
+          pytest --cov-report=xml
+      - uses: codecov/codecov-action@v3
+        with:
+          flags: integrationo
