@@ -23,14 +23,14 @@ jobs:
 
       - name: unit test
         run: |
-          pytest -m 'not e2e' --cov-report=xml
+          pytest -m 'not e2e'
       - uses: codecov/codecov-action@v3
         with:
           flags: unit
 
       - name: integration test
         run: |
-          pytest -m 'e2e' --cov-report=xml
+          pytest -m 'e2e'
       - uses: codecov/codecov-action@v3
         with:
           flags: integration
