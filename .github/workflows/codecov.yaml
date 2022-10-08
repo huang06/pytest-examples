@@ -23,17 +23,15 @@ jobs:
           python3 -m pip install -U pip setuptools wheel
           python3 -m pip install pipenv
           pipenv sync --dev --system
-
       - name: unit test
         run: |
           pytest -m 'not e2e' --cov-report xml
       - uses: codecov/codecov-action@v3
         with:
           flags: ${{ matrix.python-version }}-unit
-
       - name: integration test
         run: |
           pytest -m 'e2e' --cov-report xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: ${{ matrix.python.version }}-integration
+          flags: ${{ matrix.python-version }}-integration
