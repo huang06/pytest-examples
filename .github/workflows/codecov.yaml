@@ -36,4 +36,4 @@ jobs:
           pytest -m 'e2e' --cov-report xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: ${{ matrix-python-version }}-integration
+          flags: ${{ matrix.python.version }}-integration
