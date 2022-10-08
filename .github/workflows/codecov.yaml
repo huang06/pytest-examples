@@ -25,13 +25,15 @@ jobs:
           pipenv sync --dev --system
       - name: unit test
         run: |
-          pytest -m 'not e2e' --cov-report xml
+          pytest -m 'not e2e' --cov-report xml:python${{ matrix.python-version }}-unit.xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: ${{ matrix.python-version }}-unit
+          flags: python${{ matrix.python-version }}-unit
+          files: python${{ matrix.python-version }}-unit.xml
       - name: integration test
         run: |
-          pytest -m 'e2e' --cov-report xml
+          pytest -m 'e2e' --cov-report xml:python${{ matrix.python-version }}-integration.xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: ${{ matrix.python-version }}-integration
+          flags: python${{ matrix.python-version }}-integration
+          files: python${{ matrix.python-version }}-integration.xml
