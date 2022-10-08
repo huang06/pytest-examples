@@ -9,12 +9,15 @@ on:
 
 jobs:
   code-cov:
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10']
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: ${{ matrix.python-version }}
       - name: Install packages with pipenv
         run: |
           python3 -m pip install -U pip setuptools wheel
@@ -23,14 +26,14 @@ jobs:
 
       - name: unit test
         run: |
-          pytest -m 'not e2e'
+          pytest -m 'not e2e' --cov-report xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: unit
+          flags: ${{ matrix.python-version }}-unit
 
       - name: integration test
         run: |
-          pytest -m 'e2e'
+          pytest -m 'e2e' --cov-report xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: integration
+          flags: ${{ matrix-python-version }}-integration
