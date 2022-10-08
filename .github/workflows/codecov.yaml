@@ -21,16 +21,16 @@ jobs:
           python3 -m pip install pipenv
           pipenv sync --dev --system
 
-      - name: Run pytest and generate coverage report
+      - name: unit test
         run: |
-          pytest --cov-report=xml
+          pytest -m 'not e2e' --cov-report=xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: unittest
+          flags: unit
 
-      - name: Run pytest and generate coverage report
+      - name: integration test
         run: |
-          pytest --cov-report=xml
+          pytest -m 'e2e' --cov-report=xml
       - uses: codecov/codecov-action@v3
         with:
-          flags: integrationo
+          flags: integration
